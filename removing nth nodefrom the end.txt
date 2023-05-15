@@ -1,0 +1,26 @@
+class Solution {
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+        
+        if (head.next == null && n == 1) {
+            return null;
+        }
+
+        Stack<ListNode> stack = new Stack<>();
+        ListNode dummyNode = new ListNode(-1);
+        dummyNode.next = head;
+        ListNode pNode = dummyNode;
+        while (pNode != null) {
+            stack.push(pNode);
+            pNode = pNode.next;
+        }
+
+        while (n > 0) {
+            stack.pop();
+            n--;
+        }
+
+        pNode = stack.peek();
+        pNode.next = pNode.next.next;
+        return dummyNode.next;
+    
+    }
